@@ -26,9 +26,7 @@ const FormBuilder = () => {
 useEffect(() => {
   localStorage.setItem('formDescription',formDescription)
 }, [formDescription])
-  useEffect(() => {
-      handleAddField('text')
-  }, [])
+ 
   const handleCancelField = () => {
     if(currentField!=0){
       removeField(currentField);

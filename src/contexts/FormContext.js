@@ -4,7 +4,7 @@ import React, { createContext, useState } from 'react';
 export const FormContext = createContext();
 
 export const FormProvider = ({ children }) => {
-  const [fields, setFields] = useState([]);
+  const [fields, setFields] = useState([{type:'text', label: '', options: []}]);
 
   const addField = (field) => {
     console.log("field",field,fields);
