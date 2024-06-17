@@ -1,13 +1,19 @@
 // src/components/FormPreview.js
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { FormContext } from '../contexts/FormContext';
 import FieldPreview from './FieldPreview';
+import { Link } from 'react-router-dom';
 
-const FormPreview = ({ fields }) => {
+const FormPreview = () => {
+  const { fields } = useContext(FormContext);
   const [formValues, setFormValues] = useState({});
+
+  const formName = localStorage.getItem('formName') || '';
+  const formDescription = localStorage.getItem('formDescription') || '';
 
   const handleInputChange = (name, value) => {
     setFormValues({
-      ...formValues,
+     ...formValues,
       [name]: value,
     });
   };
@@ -18,8 +24,14 @@ const FormPreview = ({ fields }) => {
   };
 
   return (
-    <div className="form-preview">
-      <h2>Form Preview</h2>
+    <div className="form-builder">
+      <h1>{formName}</h1>
+      <h2>{formDescription}</h2>
+      <div className="form-actions">
+        <Link to="/">
+          <button className="preview-button">Form Edit</button>
+        </Link>
+      </div>
       {fields.map((field, index) => (
         <FieldPreview
           key={index}

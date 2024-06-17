@@ -1,31 +1,29 @@
 // src/contexts/FormContext.js
 import React, { createContext, useState } from 'react';
 
-const FormContext = createContext();
+export const FormContext = createContext();
 
-const FormProvider = ({ children }) => {
+export const FormProvider = ({ children }) => {
   const [fields, setFields] = useState([]);
-  const [history, setHistory] = useState([]);
 
   const addField = (field) => {
+    console.log("field",field,fields);
     setFields([...fields, field]);
-    setHistory([...history, fields]);
   };
 
   const updateField = (index, updatedField) => {
     const newFields = fields.map((field, i) => (i === index ? updatedField : field));
     setFields(newFields);
-    setHistory([...history, newFields]);
   };
 
-  const value = {
-    fields,
-    addField,
-    updateField,
-    history,
+  const removeField = (index) => {
+    const newFields = fields.filter((field, i) => i !== index);
+    setFields(newFields);
   };
 
-  return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
+  return (
+    <FormContext.Provider value={{ fields, addField, updateField, removeField }}>
+      {children}
+    </FormContext.Provider>
+  );
 };
-
-export { FormContext, FormProvider };
