@@ -28,7 +28,7 @@ useEffect(() => {
 }, [formDescription])
  
   const handleCancelField = () => {
-    if(currentField!=0){
+    if(currentField!==0){
       removeField(currentField);
       setCurrentField(null);
     }
